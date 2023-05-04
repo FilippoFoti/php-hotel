@@ -36,7 +36,13 @@ $hotels = [
         'distance_to_center' => 50
     ],
 ];
-var_dump($hotels);
+
+if (isset($_GET["parking"])) {
+    $filter = $_GET["parking"];
+} else {
+    $filter = "";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +65,37 @@ var_dump($hotels);
 <body>
     <main>
         <div class="container">
-            <table class="table">
+            <form action="index.php" method="GET">
+                <div class="row">
+                    <div class="col">
+                        <label for="parking">Filtra Hotel</label>
+                        <select class="form-select" id="parking" name="parking">
+                            <option value="">Tutti</option>
+                            <option value="true">Con Parcheggio</option>
+                            <option value="false">Senza Parcheggio</option>
+                        </select>
+                    </div>
+                    <!-- <div class="col">
+                        <label for="text">Voto</label>
+                        <select class="form-select">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                            <option value="">4</option>
+                            <option value="">5</option>
+                        </select>
+                    </div> -->
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit">Cerca</button>
+                            <button type="reset">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>
@@ -70,14 +106,21 @@ var_dump($hotels);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($hotels as $hotel) { ?>
-                        <tr>
-                            <th scope="row"><?php echo $hotel["name"]; ?></th>
-                            <td><?php echo $hotel["description"]; ?></td>
-                            <td><?php echo $hotel["parking"]; ?></td>
-                            <td><?php echo $hotel["vote"]; ?></td>
-                            <td><?php echo $hotel["distance_to_center"]; ?></td>
-                        </tr>
+                    <?php foreach ($hotels as $hotel) {
+                        if ($filter === "" || ($filter === "true" && $hotel["parking"] === true) || ($filter === "false" && $hotel["parking"] === false)) { ?>
+                            <tr>
+                                <th scope="row"><?php echo $hotel["name"]; ?></th>
+                                <td><?php echo $hotel["description"]; ?></td>
+                                <td><?php if ($hotel["parking"]) { ?>
+                                        Si
+                                    <?php } else { ?>
+                                        No
+                                    <?php } ?>
+                                </td>
+                                <td><?php echo $hotel["vote"]; ?></td>
+                                <td><?php echo $hotel["distance_to_center"]; ?> Km</td>
+                            </tr>
+                        <?php } ?>
                     <?php } ?>
                 </tbody>
             </table>
