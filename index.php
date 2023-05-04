@@ -41,7 +41,13 @@ if (isset($_GET["parking"])) {
     $filter = $_GET["parking"];
 } else {
     $filter = "";
-}
+};
+
+if (isset($_GET["vote"])) {
+    $votes = $_GET["vote"];
+} else {
+    $votes = "";
+};
 
 ?>
 
@@ -56,39 +62,50 @@ if (isset($_GET["parking"])) {
 
     <!-- STYLE-CSS -->
     <link rel="stylesheet" href="css/style.css">
-
+    
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
 
 </head>
 
 <body>
+    <!-- HEADER -->
+    <header class="d-flex align-items-center justify-content-center">
+        <img src="img/logo.svg" alt="Logo">
+    </header>
+    <!-- /HEADER -->
+
+    <!-- MAIN -->
     <main>
         <div class="container">
-            <form action="index.php" method="GET">
+            <h1 class="d-flex align-items-center justify-content-center m-0 py-3">
+                PHP Hotel by<span class="ps-2">Boolean</span>
+            </h1>
+            <form action="index.php" method="GET" class="text-center">
                 <div class="row">
-                    <div class="col">
-                        <label for="parking">Filtra Hotel</label>
+                    <div class="col d-flex align-items-center">
+                        <label for="parking" class="d-flex justify-content-center">Filtra Hotel</label>
                         <select class="form-select" id="parking" name="parking">
                             <option value="">Tutti</option>
                             <option value="true">Con Parcheggio</option>
                             <option value="false">Senza Parcheggio</option>
                         </select>
                     </div>
-                    <!-- <div class="col">
-                        <label for="text">Voto</label>
-                        <select class="form-select">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
+                    <div class="col d-flex align-items-center">
+                        <label for="text" class="d-flex justify-content-center">Voto Hotel</label>
+                        <select class="form-select" id="votes" name="vote">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
-                    </div> -->
+                    </div>
                     <div class="row">
-                        <div class="col">
-                            <button type="submit">Cerca</button>
-                            <button type="reset">Annulla</button>
+                        <div class="col text-center py-4">
+                            <button type="submit" class="me-3">Cerca</button>
+                            <button type="reset" class="ms-3">Annulla</button>
                         </div>
                     </div>
                 </div>
@@ -97,7 +114,7 @@ if (isset($_GET["parking"])) {
         <div class="container">
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th scope="col">Nome</th>
                         <th scope="col">Descrizione</th>
                         <th scope="col">Parcheggio</th>
@@ -107,8 +124,10 @@ if (isset($_GET["parking"])) {
                 </thead>
                 <tbody>
                     <?php foreach ($hotels as $hotel) {
-                        if ($filter === "" || ($filter === "true" && $hotel["parking"] === true) || ($filter === "false" && $hotel["parking"] === false)) { ?>
-                            <tr>
+                        if (($filter === "" || ($filter === "true" && $hotel["parking"] === true) || ($filter === "false" && $hotel["parking"] === false))
+                            && ($votes === "" || $hotel["vote"] >= $votes)
+                        ) { ?>
+                            <tr class="text-center">
                                 <th scope="row"><?php echo $hotel["name"]; ?></th>
                                 <td><?php echo $hotel["description"]; ?></td>
                                 <td><?php if ($hotel["parking"]) { ?>
@@ -126,6 +145,13 @@ if (isset($_GET["parking"])) {
             </table>
         </div>
     </main>
+    <!-- /MAIN -->
+
+    <!-- FOOTER -->
+    <footer class="d-flex align-items-center justify-content-center">
+        <h2>PHP Hotel by <span>Boolean</span> ©</h2>
+    </footer>
+    <!-- /FOOTER -->
 </body>
 
 </html>

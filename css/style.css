@@ -1,0 +1,53 @@
+/* COMMON */
+
+main {
+    font-weight: bold;
+    /* font-family: sans-serif; */
+    color: rgba(0, 22, 50, 1);
+}
+
+
+/* HEADER */
+
+header {
+    height: 50px;
+    width: 100%;
+    background-color: #e6e6e6;
+}
+
+/* MAIN */
+
+h1 {
+    font-size: 2rem;
+}
+
+h1 span {
+    color: rgba(0, 223, 107, 1);
+}
+
+label {
+    width: 30%;
+}
+
+#parking.form-select:focus,
+#votes.form-select:focus {
+    outline: 0;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* FOOTER */
+
+footer {
+    height: 70px;
+    background-color: #e6e6e6;
+}
+
+footer h2 {
+    color: rgba(0, 22, 50, 1);
+    font-size: 1.5rem;
+}
+
+footer h2 span {
+    color: rgba(0, 223, 107, 1);
+}
