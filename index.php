@@ -57,29 +57,32 @@ var_dump($hotels);
 </head>
 
 <body>
-
-    <?php foreach ($posts as $date => $post_arr) { ?>
-        <h2><?php echo $date; ?></h2>
-        <?php foreach ($post_arr as $post) { ?>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title"><?php echo $post["title"]; ?></h3>
-                    <p>Scritto da <?php echo $post["author"]; ?></p>
-                    <p class="mt-2"><?php echo $post["text"]; ?></p>
-                </div>
-            </div>
-        <?php } ?>
-    <?php } ?>
-
-    <?php foreach ($hotels as $hotel) { ?>
-        <h2><?php echo $hotel["name"]; ?></h2>
-        <p><?php echo $hotel["description"]; ?></p>
-        <p><?php echo $hotel["parking"]; ?></p>
-        <p><?php echo $hotel["vote"]; ?></p>
-        <p><?php echo $hotel["distance_to_center"]; ?></p>
-    <?php } ?>
-
-
+    <main>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Parcheggio</th>
+                        <th scope="col">Voto</th>
+                        <th scope="col">Distanza dal centro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($hotels as $hotel) { ?>
+                        <tr>
+                            <th scope="row"><?php echo $hotel["name"]; ?></th>
+                            <td><?php echo $hotel["description"]; ?></td>
+                            <td><?php echo $hotel["parking"]; ?></td>
+                            <td><?php echo $hotel["vote"]; ?></td>
+                            <td><?php echo $hotel["distance_to_center"]; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 
 </html>
